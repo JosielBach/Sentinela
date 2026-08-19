@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/backend/">
+    <Project Path="src/backend/Sentinela.Api/Sentinela.Api.csproj" Id="6eba4052-3d0b-4216-bbd0-90770998c3a9" />
+    <Project Path="src/backend/Sentinela.Application/Sentinela.Application.csproj" Id="43fb4e75-1836-47fe-b5a3-9b08cb5821e7" />
+    <Project Path="src/backend/Sentinela.Domain/Sentinela.Domain.csproj" Id="53a31f01-cbb5-46f1-a795-c71e081be246" />
+    <Project Path="src/backend/Sentinela.Infrastructure/Sentinela.Infrastructure.csproj" Id="3e7e0e2d-87c2-49e8-bdb4-bc644448ce2d" />
+  </Folder>
+  <Folder Name="/src/frontend/" />
+  <Folder Name="/src/shared/" />
+  <Folder Name="/tests/" />
+</Solution>
