@@ -7,6 +7,9 @@
     <Project Path="src/backend/Sentinela.Infrastructure/Sentinela.Infrastructure.csproj" Id="3e7e0e2d-87c2-49e8-bdb4-bc644448ce2d" />
   </Folder>
   <Folder Name="/src/frontend/" />
-  <Folder Name="/src/shared/" />
+  <Folder Name="/src/shared/">
+    <Project Path="src/shared/Sentinela.Communication/Sentinela.Communication.csproj" Id="1dce5a67-b1ed-4975-aeae-033b5019fd14" />
+    <Project Path="src/shared/Sentinela.Exception/Sentinela.Exception.csproj" Id="6c645e96-b680-4aae-936c-6cfc28f83deb" />
+  </Folder>
   <Folder Name="/tests/" />
 </Solution>
