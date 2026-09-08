@@ -9,7 +9,6 @@ using Sentinela.Exception;
 using Sentinela.Exception.ExceptionBase;
 
 namespace Sentinela.Application.UseCases.User.Register;
-
 public class RegisterUserAccountUseCase : IRegisterUserAccountUseCase
 {
     private readonly IPasswordHasher _passwordHasher;
@@ -50,9 +49,10 @@ public class RegisterUserAccountUseCase : IRegisterUserAccountUseCase
         var result = validator.Validate(request);
 
         var emailExist = await _userReadOnlyRepository.ExistActiveUserWithEmail(request.Email);
-        if (emailExist) 
+        if (emailExist)
+        {
             result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesException.VALIDATION_EMAIL_ALREDY_EXISTS));
-        
+        }
 
         if (result.IsValid == false)
         {
