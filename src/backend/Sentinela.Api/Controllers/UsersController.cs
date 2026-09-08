@@ -9,7 +9,7 @@ namespace Sentinela.Api.Controllers;
 [ApiController]
 public class UsersController : ControllerBase
 {
-    [HttpPost]
+    [HttpPost("register")]
     [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RegisterUsers([FromBody] RequestRegisterUserAccountJson Request,
@@ -18,6 +18,6 @@ public class UsersController : ControllerBase
        var result = await useCase.Execute(Request);
 
         return Created(string.Empty, result);
-    }
+    } 
 
 }
