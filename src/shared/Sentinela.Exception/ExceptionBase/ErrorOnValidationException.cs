@@ -1,4 +1,6 @@
-﻿namespace Sentinela.Exception.ExceptionBase;
+﻿using System.Net;
+
+namespace Sentinela.Exception.ExceptionBase;
 
 public class ErrorOnValidationException : SentinelaException
 {
@@ -7,5 +9,7 @@ public class ErrorOnValidationException : SentinelaException
     {
         _errors = errorMessages;
     }
-    public List<string> GetErrorMessages() => _errors;
+
+    public override List<string> GetErrorMessages() => _errors;
+    public override HttpStatusCode GetStatusCode() => HttpStatusCode.BadRequest;
 }
