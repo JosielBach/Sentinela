@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sentinela.Application.UseCases.Login.WithEmailAndPassword;
 using Sentinela.Application.UseCases.User.Register;
 
 namespace Sentinela.Application;
@@ -10,6 +11,7 @@ public static class DependencyInjectionExtension
         public void AddApplication() 
         { 
             services.AddScoped<IRegisterUserAccountUseCase, RegisterUserAccountUseCase>();
+            services.AddScoped<ILoginWithEmailAndPasswordUseCase, LoginWithEmailAndPasswordUseCase>();
         }
     }
 }

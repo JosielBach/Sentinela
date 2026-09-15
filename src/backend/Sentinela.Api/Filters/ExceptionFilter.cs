@@ -10,11 +10,11 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is ErrorOnValidationException errorOnValidationException)
+        if (context.Exception is SentinelaException sentinelaException)
         {
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.HttpContext.Response.StatusCode = (int)sentinelaException.GetStatusCode();
 
-            context.Result = new BadRequestObjectResult(new ResponseErrorJson(errorOnValidationException.GetErrorMessages()));
+            context.Result = new ObjectResult(new ResponseErrorJson(sentinelaException.GetErrorMessages()));
         }
         else
         {
