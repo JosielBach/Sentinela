@@ -120,6 +120,12 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Error!!</value>
   </data>
+  <data name="VALIDATION_ACCESS_TOKEN_REQUIRED" xml:space="preserve">
+    <value>Oops! This request requires an access token.</value>
+  </data>
+  <data name="VALIDATION_CURRENT_PASSWORD" xml:space="preserve">
+    <value>The current password provided is incorrect.</value>
+  </data>
   <data name="VALIDATION_EMAIL_ALREDY_EXISTS" xml:space="preserve">
     <value>Oops! Email alredy in use.</value>
   </data>
@@ -135,7 +141,13 @@
   <data name="VALIDATION_NAME_REQUIRED" xml:space="preserve">
     <value>Oops! Name is required.</value>
   </data>
+  <data name="VALIDATION_PASSWORD_LENGTH" xml:space="preserve">
+    <value>The password must be at least 8 characters long.</value>
+  </data>
   <data name="VALIDATION_PASSWORD_REQUIRED" xml:space="preserve">
     <value>Oops! Password is required.</value>
+  </data>
+  <data name="VALIDATION_RESOURCE_ACCESS_DENIED" xml:space="preserve">
+    <value>Oops! You don't have access to this feature.</value>
   </data>
 </root>

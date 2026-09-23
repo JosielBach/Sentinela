@@ -1,6 +1,7 @@
 ﻿using CommonTestUtilities.Requests;
 using Microsoft.EntityFrameworkCore;
 using Sentinela.Communication.Requests;
+using Sentinela.Domain.Entities;
 using Sentinela.Domain.Extensions;
 using Sentinela.Exception;
 using Shouldly;
@@ -12,17 +13,13 @@ using WebApi.Tests.Resources;
 
 namespace WebApi.Tests.Login.WithEmailAndPassword;
 
-public class LoginWithEmailAndPasswordTests : IClassFixture<SentinelaApplicationFactory>
+public class LoginWithEmailAndPasswordTests : BaseIntegrationTest
 {
     private const string REQUEST_URI = "/authentication/login";
-
-    private readonly HttpClient _httpClient;
-    private readonly UserIdentityManager _user01;
-
-    public LoginWithEmailAndPasswordTests(SentinelaApplicationFactory factory)
+    private readonly UserIdentityManager _user1;
+    public LoginWithEmailAndPasswordTests(SentinelaApplicationFactory factory) : base(factory)
     {
-        _httpClient = factory.CreateClient();
-        _user01 = factory.User01;
+        _user1 = factory.User01;
     }
 
     [Fact]
@@ -30,11 +27,11 @@ public class LoginWithEmailAndPasswordTests : IClassFixture<SentinelaApplication
     {
         var request = new RequestLoginJson
         {
-            Email = _user01.GetEmail(),
-            Password = _user01.GetPassword()
+            Email = _user1.GetEmail(),
+            Password = _user1.GetPassword()
         };
 
-        var response = await _httpClient.PostAsJsonAsync(REQUEST_URI, request);
+        var response = await Post(REQUEST_URI, request);
 
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
 
@@ -42,8 +39,8 @@ public class LoginWithEmailAndPasswordTests : IClassFixture<SentinelaApplication
 
         var responseData = await JsonDocument.ParseAsync(responseBody);
 
-        responseData.RootElement.GetProperty("name").GetString().ShouldBe(_user01.GetName());
-        responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldBeEmpty();
+        responseData.RootElement.GetProperty("name").GetString().ShouldBe(_user1.GetName());
+        responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldNotBeEmpty();
         responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldBeEmpty();
     }
 
@@ -54,10 +51,7 @@ public class LoginWithEmailAndPasswordTests : IClassFixture<SentinelaApplication
     {
         var request = RequestLoginJsonBuilder.Build();
 
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(culture);
-
-        var response = await _httpClient.PostAsJsonAsync(REQUEST_URI, request);
+        var response = await Post(REQUEST_URI, request, culture: culture);
 
         response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
 

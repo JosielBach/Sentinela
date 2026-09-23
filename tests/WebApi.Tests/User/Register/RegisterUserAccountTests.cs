@@ -1,9 +1,7 @@
 ﻿using CommonTestUtilities.Requests;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Sentinela.Domain.Extensions;
 using Sentinela.Exception;
-using Sentinela.Infrastructure.DataAccess;
 using Shouldly;
 using System.Globalization;
 using System.Net;
@@ -12,17 +10,12 @@ using System.Text.Json;
 
 namespace WebApi.Tests.User.Register;
 
-public class RegisterUserAccountTests : IClassFixture<SentinelaApplicationFactory>
+public class RegisterUserAccountTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "/users/register";
-    private readonly HttpClient _httpClient;
-    private readonly SentinelaDbContext _dbContext;
-    public RegisterUserAccountTests(SentinelaApplicationFactory webApplication)
+    private const string REQUEST_URI = "/users";
+    public RegisterUserAccountTests(SentinelaApplicationFactory factory) : base(factory)
     {
-        _httpClient = webApplication.CreateClient();
-
-        var scope = webApplication.Services.CreateScope();
-        _dbContext = scope.ServiceProvider.GetRequiredService<SentinelaDbContext>();
+ 
     }
 
     [Fact]
@@ -30,7 +23,7 @@ public class RegisterUserAccountTests : IClassFixture<SentinelaApplicationFactor
     {
         var request = RequestRegisterUserAccountJsonBuilder.Build();
 
-        var response = await _httpClient.PostAsJsonAsync(REQUEST_URI, request);
+        var response = await Post(REQUEST_URI, request);
 
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
 
@@ -39,10 +32,10 @@ public class RegisterUserAccountTests : IClassFixture<SentinelaApplicationFactor
         var responseData = await JsonDocument.ParseAsync(responseBody);
 
         responseData.RootElement.GetProperty("name").GetString().ShouldBe(request.Name);
-        responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldBeEmpty();
+        responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldNotBeEmpty();
         responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldBeEmpty();
 
-        var userexist = await _dbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email));
+        var userexist = await DbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email));
         
         userexist.ShouldBeTrue();
     }
@@ -55,10 +48,7 @@ public class RegisterUserAccountTests : IClassFixture<SentinelaApplicationFactor
         var request = RequestRegisterUserAccountJsonBuilder.Build();
         request.Name = string.Empty;
 
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(culture);
-
-        var response = await _httpClient.PostAsJsonAsync(REQUEST_URI, request);
+        var response = await Post(REQUEST_URI, request, culture: culture);
 
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
@@ -75,7 +65,7 @@ public class RegisterUserAccountTests : IClassFixture<SentinelaApplicationFactor
             errorsList.ShouldContain(error => error.GetString().IsNotEmpty()! && error.GetString()!.Equals(errorMessage));
         });
 
-        var userexist = await _dbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email));
+        var userexist = await DbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email));
 
         userexist.ShouldBeFalse();
     }

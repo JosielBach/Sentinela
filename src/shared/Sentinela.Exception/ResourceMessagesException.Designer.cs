@@ -70,6 +70,24 @@ namespace Sentinela.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! This request requires an access token..
+        /// </summary>
+        public static string VALIDATION_ACCESS_TOKEN_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_ACCESS_TOKEN_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The current password provided is incorrect..
+        /// </summary>
+        public static string VALIDATION_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("VALIDATION_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! Email alredy in use..
         /// </summary>
         public static string VALIDATION_EMAIL_ALREDY_EXISTS {
@@ -115,11 +133,29 @@ namespace Sentinela.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The password must be at least 8 characters long..
+        /// </summary>
+        public static string VALIDATION_PASSWORD_LENGTH {
+            get {
+                return ResourceManager.GetString("VALIDATION_PASSWORD_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! Password is required..
         /// </summary>
         public static string VALIDATION_PASSWORD_REQUIRED {
             get {
                 return ResourceManager.GetString("VALIDATION_PASSWORD_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! You don&apos;t have access to this feature..
+        /// </summary>
+        public static string VALIDATION_RESOURCE_ACCESS_DENIED {
+            get {
+                return ResourceManager.GetString("VALIDATION_RESOURCE_ACCESS_DENIED", resourceCulture);
             }
         }
     }
