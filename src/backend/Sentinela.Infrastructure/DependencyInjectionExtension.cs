@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sentinela.Domain.Identity;
 using Sentinela.Domain.Repositories;
 using Sentinela.Domain.Repositories.User;
 using Sentinela.Domain.Security.PasswordHashing;
+using Sentinela.Domain.Security.Tokens;
 using Sentinela.Infrastructure.DataAccess;
 using Sentinela.Infrastructure.DataAccess.Repositories;
+using Sentinela.Infrastructure.Identity;
 using Sentinela.Infrastructure.Security.PasswordHashing;
+using Sentinela.Infrastructure.Security.Tokens.Access;
 
 namespace Sentinela.Infrastructure;
 
@@ -16,13 +20,35 @@ public static class DependencyInjectionExtension
     {
         public void AddInfrastructure(IConfiguration configuration)
         {
+            services.AddRepositories();
+            services.AddTokens(configuration);
             services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
+            services.AddDbContext(configuration);
+            services.AddScoped<ILoggedUser, LoggedUser>();
+        }
 
+        private void AddRepositories()
+        {
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
 
+        private void AddTokens(IConfiguration configuration) 
+        {
+            services.AddScoped<IAccessTokenGenerator>(provider =>
+            {
+                var expirationTime = configuration.GetValue<uint>("Jwt:ExpirationTime");
+                var signingKey = configuration.GetValue<string>("Jwt:SigningKey");
+
+                return new JwtTokenHandler(expirationTime, signingKey!);
+            });
+        }
+
+        private void AddDbContext(IConfiguration configuration)
+        {
             services.AddDbContext<SentinelaDbContext>(config =>
             {
                 var connectionString = configuration.GetConnectionString("DbConnection");

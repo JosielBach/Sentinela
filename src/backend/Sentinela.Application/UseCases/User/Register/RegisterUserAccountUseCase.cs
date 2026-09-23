@@ -5,6 +5,7 @@ using Sentinela.Communication.Responses;
 using Sentinela.Domain.Repositories;
 using Sentinela.Domain.Repositories.User;
 using Sentinela.Domain.Security.PasswordHashing;
+using Sentinela.Domain.Security.Tokens;
 using Sentinela.Exception;
 using Sentinela.Exception.ExceptionBase;
 
@@ -15,13 +16,15 @@ public class RegisterUserAccountUseCase : IRegisterUserAccountUseCase
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
     private readonly IUserReadOnlyRepository _userReadOnlyRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
     public RegisterUserAccountUseCase(IPasswordHasher passwordHasher, IUserWriteOnlyRepository userWriteOnlyRepository,
-        IUnitOfWork unitOfWork, IUserReadOnlyRepository userReadOnlyRepository)
+        IUnitOfWork unitOfWork, IUserReadOnlyRepository userReadOnlyRepository, IAccessTokenGenerator accessTokenGenerator)
     {
         _passwordHasher = passwordHasher;
         _userWriteOnlyRepository = userWriteOnlyRepository;
         _unitOfWork = unitOfWork;
         _userReadOnlyRepository = userReadOnlyRepository;
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
     public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserAccountJson request)
@@ -38,7 +41,10 @@ public class RegisterUserAccountUseCase : IRegisterUserAccountUseCase
         return new ResponseRegisterUserJson
         {
             Name = user.Name,
-            Tokens = new ResponseTokensJson()
+            Tokens = new ResponseTokensJson
+            {
+                AccessToken = _accessTokenGenerator.Generate(user)
+            }
         };
     }
 

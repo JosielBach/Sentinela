@@ -8,7 +8,7 @@ using Sentinela.Exception;
 using Sentinela.Exception.ExceptionBase;
 using Shouldly;
 
-namespace UseCases.Tests.User.Login.WithEmailAndPassword;
+namespace UseCases.Tests.Login.WithEmailAndPassword;
 
 public class LoginWithEmailAndPasswordUseCaseTests 
 {
@@ -27,7 +27,7 @@ public class LoginWithEmailAndPasswordUseCaseTests
         result.ShouldNotBeNull();
         result.Tokens.ShouldNotBeNull();
         result.Name.ShouldBe(user.Name);
-        result.Tokens.AccessToken.ShouldBeNullOrEmpty();
+        result.Tokens.AccessToken.ShouldNotBeNullOrEmpty();
         result.Tokens.RefreshToken.ShouldBeNullOrEmpty();
     }
 
@@ -63,6 +63,7 @@ public class LoginWithEmailAndPasswordUseCaseTests
 
     private LoginWithEmailAndPasswordUseCase CreateUseCase(string? password = null, Sentinela.Domain.Entities.User? user = null)
     {
+        var accessTokenGeneratorBuilder = IAccessTokenGeneratorBuilder.Build();
         var passwordHasherBuilder = new IPasswordHasherBuilder();
         var userReadOnlyRepositoryBuilder = new IUserReadOnlyRepositoryBuilder();
         if (user is not null)
@@ -71,6 +72,6 @@ public class LoginWithEmailAndPasswordUseCaseTests
         if (password.IsNotEmpty())
             passwordHasherBuilder.VerifyPassword(password);
 
-        return new LoginWithEmailAndPasswordUseCase(passwordHasherBuilder.Build(), userReadOnlyRepositoryBuilder.Build());
+        return new LoginWithEmailAndPasswordUseCase(passwordHasherBuilder.Build(), userReadOnlyRepositoryBuilder.Build(), accessTokenGeneratorBuilder);
     }
 }

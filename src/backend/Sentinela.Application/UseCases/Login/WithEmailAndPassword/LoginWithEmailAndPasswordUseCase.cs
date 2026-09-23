@@ -2,6 +2,7 @@
 using Sentinela.Communication.Responses;
 using Sentinela.Domain.Repositories.User;
 using Sentinela.Domain.Security.PasswordHashing;
+using Sentinela.Domain.Security.Tokens;
 using Sentinela.Exception.ExceptionBase;
 
 namespace Sentinela.Application.UseCases.Login.WithEmailAndPassword;
@@ -10,10 +11,12 @@ public class LoginWithEmailAndPasswordUseCase : ILoginWithEmailAndPasswordUseCas
 {
     private readonly IPasswordHasher _passwordHasher;
     private readonly IUserReadOnlyRepository _userReadOnlyRepository;
-    public LoginWithEmailAndPasswordUseCase(IPasswordHasher passwordHasher, IUserReadOnlyRepository userReadOnlyRepository)
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
+    public LoginWithEmailAndPasswordUseCase(IPasswordHasher passwordHasher, IUserReadOnlyRepository userReadOnlyRepository, IAccessTokenGenerator accessTokenGenerator)
     {
         _passwordHasher = passwordHasher;
         _userReadOnlyRepository = userReadOnlyRepository;
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
     public async Task<ResponseRegisterUserJson> Execute(RequestLoginJson request)
@@ -29,7 +32,10 @@ public class LoginWithEmailAndPasswordUseCase : ILoginWithEmailAndPasswordUseCas
         return new ResponseRegisterUserJson
         {
             Name = user.Name,
-            Tokens = new ResponseTokensJson()
+            Tokens = new ResponseTokensJson
+            {
+                AccessToken = _accessTokenGenerator.Generate(user)
+            }
         };
     }
 }

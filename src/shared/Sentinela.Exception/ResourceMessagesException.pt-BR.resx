@@ -120,6 +120,12 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Erro desconhecido!&gt;&lt;</value>
   </data>
+  <data name="VALIDATION_ACCESS_TOKEN_REQUIRED" xml:space="preserve">
+    <value>Ops! Está requisição precisa de um access token.</value>
+  </data>
+  <data name="VALIDATION_CURRENT_PASSWORD" xml:space="preserve">
+    <value>A senha atual informada está incorreta.</value>
+  </data>
   <data name="VALIDATION_EMAIL_ALREDY_EXISTS" xml:space="preserve">
     <value>Ops! O E-Mail já está em uso.</value>
   </data>
@@ -135,7 +141,13 @@
   <data name="VALIDATION_NAME_REQUIRED" xml:space="preserve">
     <value>Ops! O nome é obrigatório.</value>
   </data>
+  <data name="VALIDATION_PASSWORD_LENGTH" xml:space="preserve">
+    <value>A senha deve ter no mínimo 8 caracteres.</value>
+  </data>
   <data name="VALIDATION_PASSWORD_REQUIRED" xml:space="preserve">
     <value>Ops! A senha é obrigatória.</value>
+  </data>
+  <data name="VALIDATION_RESOURCE_ACCESS_DENIED" xml:space="preserve">
+    <value>Opa! Você não tem acesso a este recurso.</value>
   </data>
 </root>
