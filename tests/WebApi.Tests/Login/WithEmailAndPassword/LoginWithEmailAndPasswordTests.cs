@@ -15,7 +15,7 @@ namespace WebApi.Tests.Login.WithEmailAndPassword;
 
 public class LoginWithEmailAndPasswordTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "/authentication/login";
+    private const string REQUEST_URI = "/api/v1/authentication/login";
     private readonly UserIdentityManager _user1;
     public LoginWithEmailAndPasswordTests(SentinelaApplicationFactory factory) : base(factory)
     {

@@ -135,6 +135,9 @@
   <data name="VALIDATION_EMAIL_REQUIRED" xml:space="preserve">
     <value>Ops! O E-Mail é obrigatório.</value>
   </data>
+  <data name="VALIDATION_ASSET_TYPE_INVALID" xml:space="preserve">
+    <value>Ops! O tipo do ativo é inválido.</value>
+  </data>
   <data name="VALIDATION_LOGIN_INVALID" xml:space="preserve">
     <value>Ops! Alguma coisa está errada.</value>
   </data>
@@ -149,5 +152,11 @@
   </data>
   <data name="VALIDATION_RESOURCE_ACCESS_DENIED" xml:space="preserve">
     <value>Opa! Você não tem acesso a este recurso.</value>
+  </data>
+  <data name="VALIDATION_HOSTNAME_REQUIRED" xml:space="preserve">
+    <value>Ops! O nome do host é obrigatório.</value>
+  </data>
+  <data name="VALIDATION_HOSTNAME_ALREDY_EXISTS" xml:space="preserve">
+    <value>Ops! Hostname já em uso.</value>
   </data>
 </root>

@@ -6,7 +6,7 @@ namespace WebApi.Tests.User.Update;
 
 public class UpdateUserTokenTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "/users/profile";
+    private const string REQUEST_URI = "/api/v1/users/profile";
     private readonly string _tokenUserNotExistDatabase;
 
     public UpdateUserTokenTests(SentinelaApplicationFactory factory) : base(factory)

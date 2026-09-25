@@ -1,5 +1,4 @@
 ﻿using CommonTestUtilities.Requests;
-using Docker.DotNet.Models;
 using Sentinela.Communication.Requests;
 using Sentinela.Domain.Extensions;
 using Sentinela.Exception;
@@ -13,7 +12,7 @@ namespace WebApi.Tests.User.ChangePassword;
 
 public class ChangePasswordTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "users/password";
+    private const string REQUEST_URI = "api/v1/users/password";
     private readonly UserIdentityManager _user01;
 
     public ChangePasswordTests(SentinelaApplicationFactory factory) : base(factory)

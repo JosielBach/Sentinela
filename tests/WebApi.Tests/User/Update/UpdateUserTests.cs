@@ -13,7 +13,7 @@ namespace WebApi.Tests.User.Update;
 
 public class UpdateUserTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "/users/profile";
+    private const string REQUEST_URI = "/api/v1/users/profile";
     private readonly UserIdentityManager _user01;
     public UpdateUserTests(SentinelaApplicationFactory factory) : base(factory)
     {
