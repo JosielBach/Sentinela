@@ -7,7 +7,7 @@ namespace WebApi.Tests.User.ChangePassword;
 
 public class ChangePasswordTokenTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "users/password";
+    private const string REQUEST_URI = "api/v1/users/password";
     private readonly string _tokenUserNotExistDatabase;
 
     public ChangePasswordTokenTests(SentinelaApplicationFactory factory) : base(factory)

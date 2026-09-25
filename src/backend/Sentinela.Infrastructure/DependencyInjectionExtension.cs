@@ -3,12 +3,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sentinela.Domain.Identity;
 using Sentinela.Domain.Repositories;
+using Sentinela.Domain.Repositories.Asset;
 using Sentinela.Domain.Repositories.User;
+using Sentinela.Domain.Security.ApiKeyHashing;
 using Sentinela.Domain.Security.PasswordHashing;
 using Sentinela.Domain.Security.Tokens;
 using Sentinela.Infrastructure.DataAccess;
 using Sentinela.Infrastructure.DataAccess.Repositories;
 using Sentinela.Infrastructure.Identity;
+using Sentinela.Infrastructure.Security.ApiKeyHashing;
 using Sentinela.Infrastructure.Security.PasswordHashing;
 using Sentinela.Infrastructure.Security.Tokens.Access;
 
@@ -25,6 +28,7 @@ public static class DependencyInjectionExtension
             services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
             services.AddDbContext(configuration);
             services.AddScoped<ILoggedUser, LoggedUser>();
+            services.AddScoped<IApiKeyHasher, Sha256ApiKeyHasher>();
         }
 
         private void AddRepositories()
@@ -32,6 +36,8 @@ public static class DependencyInjectionExtension
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+            services.AddScoped<IAssetReadOnlyRepository, AssetRepository>();
+            services.AddScoped<IAssetWriteOnlyRepository, AssetRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

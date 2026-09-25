@@ -6,7 +6,7 @@ namespace WebApi.Tests.User.Profile;
 
 public class GetUserProfileTokenTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "users/";
+    private const string REQUEST_URI = "api/v1/users/";
     private readonly string _tokenUserNotExistDatabase;
 
     public GetUserProfileTokenTests(SentinelaApplicationFactory factory) : base(factory)

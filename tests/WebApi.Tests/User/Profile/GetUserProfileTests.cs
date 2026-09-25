@@ -8,7 +8,7 @@ namespace WebApi.Tests.User.Profile;
 
 public class GetUserProfileTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "/users";
+    private const string REQUEST_URI = "/api/v1/users";
     private readonly UserIdentityManager _user01;
 
     public GetUserProfileTests(SentinelaApplicationFactory factory) : base(factory)

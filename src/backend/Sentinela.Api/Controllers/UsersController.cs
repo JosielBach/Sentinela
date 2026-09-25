@@ -9,17 +9,17 @@ using Sentinela.Communication.Responses;
 
 namespace Sentinela.Api.Controllers;
 
-[Route("[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> RegisterUsers([FromBody] RequestRegisterUserAccountJson Request,
+    public async Task<IActionResult> RegisterUsers([FromBody] RequestRegisterUserAccountJson request,
         [FromServices] IRegisterUserAccountUseCase useCase)
     {
-       var result = await useCase.Execute(Request);
+       var result = await useCase.Execute(request);
 
         return Created(string.Empty, result);
     }

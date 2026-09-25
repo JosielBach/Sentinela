@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sentinela.Application.UseCases.Login.WithEmailAndPassword;
 using Sentinela.Communication.Requests;
 using Sentinela.Communication.Responses;
 
 namespace Sentinela.Api.Controllers;
 
-[Route("[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class AuthenticationController : ControllerBase
 {

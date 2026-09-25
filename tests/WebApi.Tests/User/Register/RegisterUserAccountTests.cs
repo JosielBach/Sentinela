@@ -12,7 +12,7 @@ namespace WebApi.Tests.User.Register;
 
 public class RegisterUserAccountTests : BaseIntegrationTest
 {
-    private const string REQUEST_URI = "/users";
+    private const string REQUEST_URI = "/api/v1/users";
     public RegisterUserAccountTests(SentinelaApplicationFactory factory) : base(factory)
     {
  

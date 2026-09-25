@@ -79,6 +79,15 @@ namespace Sentinela.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The asset type is invalid..
+        /// </summary>
+        public static string VALIDATION_ASSET_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_ASSET_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The current password provided is incorrect..
         /// </summary>
         public static string VALIDATION_CURRENT_PASSWORD {
@@ -111,6 +120,24 @@ namespace Sentinela.Exception {
         public static string VALIDATION_EMAIL_REQUIRED {
             get {
                 return ResourceManager.GetString("VALIDATION_EMAIL_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! Hostname already in use..
+        /// </summary>
+        public static string VALIDATION_HOSTNAME_ALREDY_EXISTS {
+            get {
+                return ResourceManager.GetString("VALIDATION_HOSTNAME_ALREDY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The hostname is required..
+        /// </summary>
+        public static string VALIDATION_HOSTNAME_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_HOSTNAME_REQUIRED", resourceCulture);
             }
         }
         
