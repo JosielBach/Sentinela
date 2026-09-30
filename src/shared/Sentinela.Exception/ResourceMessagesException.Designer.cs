@@ -160,6 +160,24 @@ namespace Sentinela.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The page must be greater than or equal to 1..
+        /// </summary>
+        public static string VALIDATION_PAGE_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_PAGE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The page size must be between 1 and 100..
+        /// </summary>
+        public static string VALIDATION_PAGE_SIZE_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_PAGE_SIZE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The password must be at least 8 characters long..
         /// </summary>
         public static string VALIDATION_PASSWORD_LENGTH {

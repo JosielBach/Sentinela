@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sentinela.Application.UseCases.Asset.ListAssets;
 using Sentinela.Application.UseCases.Asset.Register;
 using Sentinela.Application.UseCases.Login.WithEmailAndPassword;
 using Sentinela.Application.UseCases.User.ChangePassword;
@@ -20,6 +21,7 @@ public static class DependencyInjectionExtension
             services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
             services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
             services.AddScoped<IRegisterAssetUseCase, RegisterAssetUseCase>();
+            services.AddScoped<IListAssetsUseCase, ListAssetsUseCase>();
         }
     }
 }
