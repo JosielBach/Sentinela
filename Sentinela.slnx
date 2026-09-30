@@ -5,6 +5,7 @@
     <Project Path="src/backend/Sentinela.Application/Sentinela.Application.csproj" Id="43fb4e75-1836-47fe-b5a3-9b08cb5821e7" />
     <Project Path="src/backend/Sentinela.Domain/Sentinela.Domain.csproj" Id="53a31f01-cbb5-46f1-a795-c71e081be246" />
     <Project Path="src/backend/Sentinela.Infrastructure/Sentinela.Infrastructure.csproj" Id="3e7e0e2d-87c2-49e8-bdb4-bc644448ce2d" />
+    <Project Path="src/backend/Sentinela.Worker/Sentinela.Worker.csproj" Id="8eda75ae-6a11-447e-bcef-4e409e4258a0" />
   </Folder>
   <Folder Name="/src/frontend/" />
   <Folder Name="/src/shared/">

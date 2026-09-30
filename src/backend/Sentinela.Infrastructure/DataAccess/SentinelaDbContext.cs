@@ -11,6 +11,7 @@ internal class SentinelaDbContext : DbContext
     
     public DbSet<User> Users {  get; set; }
     public DbSet<Asset> Assets { get; set; }
+    public DbSet<Sample> Samples { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,6 +26,16 @@ internal class SentinelaDbContext : DbContext
             entity.Property(asset => asset.Hostname).HasMaxLength(253);
             entity.Property(asset => asset.ApiKeyHash).HasMaxLength(64);
             entity.HasIndex(asset => asset.ApiKeyHash).IsUnique();
+        });
+
+        modelBuilder.Entity<Sample>(entity =>
+        {
+            entity.HasIndex(sample => new { sample.AssetId, sample.Metric, sample.CollectedAt })
+          .IsDescending(false, false, true);
+
+            entity.HasOne<Asset>()
+                  .WithMany()
+                  .HasForeignKey(sample => sample.AssetId);
         });
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sentinela.Infrastructure.DataAccess;
 
@@ -10,9 +11,11 @@ using Sentinela.Infrastructure.DataAccess;
 namespace Sentinela.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(SentinelaDbContext))]
-    partial class SentinelaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260930180916_AddSamples")]
+    partial class AddSamples
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
