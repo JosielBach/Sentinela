@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sentinela.Domain.Identity;
 using Sentinela.Domain.Repositories;
 using Sentinela.Domain.Repositories.Asset;
+using Sentinela.Domain.Repositories.Sample;
 using Sentinela.Domain.Repositories.User;
 using Sentinela.Domain.Security.ApiKeyHashing;
 using Sentinela.Domain.Security.PasswordHashing;
@@ -38,6 +39,8 @@ public static class DependencyInjectionExtension
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
             services.AddScoped<IAssetReadOnlyRepository, AssetRepository>();
             services.AddScoped<IAssetWriteOnlyRepository, AssetRepository>();
+            services.AddScoped<IAssetUpdateOnlyRepository, AssetRepository>();
+            services.AddScoped<ISampleWriteOnlyRepository, SampleRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

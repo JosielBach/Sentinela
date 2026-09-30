@@ -6,4 +6,5 @@ public interface IAssetReadOnlyRepository
     Task<Entities.Asset?> GetById(Guid assetId);
     Task<bool> ExistAssetWithHostname(string hostname);
     Task<int> CountAll();
+    Task<Entities.Asset?> GetByApiKeyHash(string apiKeyHash);
 }
