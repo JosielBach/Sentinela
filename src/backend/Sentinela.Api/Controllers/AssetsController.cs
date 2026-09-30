@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sentinela.Application.UseCases.Asset.ListAssets;
 using Sentinela.Application.UseCases.Asset.Register;
 using Sentinela.Communication.Requests;
 using Sentinela.Communication.Responses;
@@ -19,5 +20,16 @@ public class AssetsController : ControllerBase
     {
         var result = await useCase.Execute(request);
         return Created(string.Empty, result);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [ProducesResponseType(typeof(ResponseAssetsJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> GetAllAssets([FromServices] IListAssetsUseCase useCase, [FromQuery] RequestListAssetsJson request)
+    {
+        var result = await useCase.Execute(request);
+
+        return Ok(result);
     }
 }

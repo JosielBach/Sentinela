@@ -5,7 +5,7 @@ using Sentinela.Domain.Security.Tokens;
 
 namespace CommonTestUtilities.Security;
 
-public interface IAccessTokenGeneratorBuilder 
+public class IAccessTokenGeneratorBuilder 
 {
     public static IAccessTokenGenerator Build()
     {

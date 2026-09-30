@@ -159,4 +159,10 @@
   <data name="VALIDATION_HOSTNAME_ALREDY_EXISTS" xml:space="preserve">
     <value>Oops! Hostname already in use.</value>
   </data>
+  <data name="VALIDATION_PAGE_INVALID" xml:space="preserve">
+    <value>Oops! The page must be greater than or equal to 1.</value>
+  </data>
+  <data name="VALIDATION_PAGE_SIZE_INVALID" xml:space="preserve">
+    <value>Oops! The page size must be between 1 and 100.</value>
+  </data>
 </root>
