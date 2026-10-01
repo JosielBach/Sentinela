@@ -1,6 +1,16 @@
 @Sentinela.Api_HostAddress = http://localhost:5217
+@AgentKey = s
 
-GET {{Sentinela.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### Lote válido: esperado 202
+POST {{Sentinela.Api_HostAddress}}/api/v1/ingest
+X-Agent-Key: {{AgentKey}}
+Idempotency-Key: teste-01
+Content-Type: application/json
 
+{
+  "samples": [
+    { "metric": 1, "value": 42.5, "collectedAt": "2026-10-01T12:00:00Z" },
+    { "metric": 2, "value": 63.1, "collectedAt": "2026-10-01T12:00:00Z" }
+  ]
+}
 ###

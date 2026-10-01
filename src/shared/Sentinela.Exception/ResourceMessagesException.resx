@@ -165,4 +165,13 @@
   <data name="VALIDATION_PAGE_SIZE_INVALID" xml:space="preserve">
     <value>Oops! The page size must be between 1 and 100.</value>
   </data>
+  <data name="VALIDATION_IDEMPOTENCY_KEY_REQUIRED" xml:space="preserve">
+    <value>Oops! The Idempotency-Key header is required.</value>
+  </data>
+  <data name="VALIDATION_SAMPLES_REQUIRED" xml:space="preserve">
+    <value>Oops! The batch must have at least one sample.</value>
+  </data>
+  <data name="VALIDATION_METRIC_INVALID" xml:space="preserve">
+    <value>Oops! The metric is invalid.</value>
+  </data>
 </root>
