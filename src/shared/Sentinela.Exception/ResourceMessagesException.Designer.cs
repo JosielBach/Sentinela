@@ -142,6 +142,15 @@ namespace Sentinela.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The Idempotency-Key header is required..
+        /// </summary>
+        public static string VALIDATION_IDEMPOTENCY_KEY_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_IDEMPOTENCY_KEY_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! Something is wrong..
         /// </summary>
         public static string VALIDATION_LOGIN_INVALID {
@@ -150,6 +159,15 @@ namespace Sentinela.Exception {
             }
         }
         
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The metric is invalid..
+        /// </summary>
+        public static string VALIDATION_METRIC_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_METRIC_INVALID", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! Name is required..
         /// </summary>
@@ -201,6 +219,15 @@ namespace Sentinela.Exception {
         public static string VALIDATION_RESOURCE_ACCESS_DENIED {
             get {
                 return ResourceManager.GetString("VALIDATION_RESOURCE_ACCESS_DENIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Oops! The batch must have at least one sample..
+        /// </summary>
+        public static string VALIDATION_SAMPLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_SAMPLES_REQUIRED", resourceCulture);
             }
         }
     }

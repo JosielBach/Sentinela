@@ -165,4 +165,13 @@
   <data name="VALIDATION_PAGE_SIZE_INVALID" xml:space="preserve">
     <value>Ops! O tamanho da página deve estar entre 1 e 100.</value>
   </data>
+  <data name="VALIDATION_IDEMPOTENCY_KEY_REQUIRED" xml:space="preserve">
+    <value>Ops! O header Idempotency-Key é obrigatório.</value>
+  </data>
+  <data name="VALIDATION_SAMPLES_REQUIRED" xml:space="preserve">
+    <value>Ops! O lote precisa ter pelo menos uma amostra.</value>
+  </data>
+  <data name="VALIDATION_METRIC_INVALID" xml:space="preserve">
+    <value>Ops! A métrica é inválida.</value>
+  </data>
 </root>
