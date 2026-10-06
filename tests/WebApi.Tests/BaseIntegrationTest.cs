@@ -18,10 +18,12 @@ public abstract class BaseIntegrationTest : IClassFixture<SentinelaApplicationFa
         DbContext = _sope.ServiceProvider.GetRequiredService<SentinelaDbContext>();
     }
 
-    protected async Task<HttpResponseMessage> Post(string requestUri, object request, string accessToken = "", string culture = "pt-BR")
+    protected async Task<HttpResponseMessage> Post(string requestUri, object request, string accessToken = "", string culture = "pt-BR"
+        ,IDictionary<string, string>? headers = null)
     {
         ChangeCulture(culture);
         AuthorizeRequest(accessToken);
+        AddHeaders(headers);
 
         return await _httpClient.PostAsJsonAsync(requestUri, request);
     }
@@ -56,5 +58,13 @@ public abstract class BaseIntegrationTest : IClassFixture<SentinelaApplicationFa
     {
         _sope?.Dispose();
         DbContext?.Dispose();
+    }
+    private void AddHeaders(IDictionary<string, string>? headers)
+    {
+        if (headers is null)
+            return;
+
+        foreach (var header in headers)
+            _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
     }
 }

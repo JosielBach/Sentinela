@@ -1,5 +1,5 @@
 @Sentinela.Api_HostAddress = http://localhost:5217
-@AgentKey = s
+@AgentKey = shhh
 
 ### Lote válido: esperado 202
 POST {{Sentinela.Api_HostAddress}}/api/v1/ingest

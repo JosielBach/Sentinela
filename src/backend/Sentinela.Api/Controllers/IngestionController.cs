@@ -19,11 +19,11 @@ public class IngestionController : ControllerBase
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Ingest([FromBody] RequestSampleBatchJson request, 
         [FromServices] IIngestSampleBatchUseCase useCase, 
-        [FromHeader (Name = "Idempotency-Key")] string idempotencyKey)
+        [FromHeader (Name = "Idempotency-Key")] string? idempotencyKey)
     {
         var assetId = (Guid)HttpContext.Items["AssetId"]!;
 
-        await useCase.Execute(request, assetId, idempotencyKey);
+        await useCase.Execute(request, assetId, idempotencyKey!);
 
         return Accepted();
     }

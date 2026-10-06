@@ -10,4 +10,8 @@ public class IUnitOfWorkBuilder
         var mock = new Mock<IUnitOfWork>();
         return mock.Object;
     }
+    public static void VerifyCommit(IUnitOfWork unitOfWork)
+    {
+        Mock.Get(unitOfWork).Verify(uow => uow.Commit(), Times.Once);
+    }
 }

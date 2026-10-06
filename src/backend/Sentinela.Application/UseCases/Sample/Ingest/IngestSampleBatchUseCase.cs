@@ -1,5 +1,4 @@
 ﻿using Sentinela.Communication.Requests;
-using Sentinela.Domain.Entities;
 using Sentinela.Domain.Messaging;
 using Sentinela.Exception.ExceptionBase;
 
