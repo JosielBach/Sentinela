@@ -37,6 +37,13 @@ public static class DependencyInjectionExtension
             
         }
 
+        public void AddWorkerInfrastructure(IConfiguration configuration)
+        {
+            services.AddRepositories();
+            services.AddDbContext(configuration);
+            services.AddMessaging(configuration);
+        }
+
         private void AddRepositories()
         {
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
