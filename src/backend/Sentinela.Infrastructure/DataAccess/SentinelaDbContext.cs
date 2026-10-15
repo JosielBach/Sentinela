@@ -3,6 +3,7 @@ using Sentinela.Domain.Entities;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("WebApi.Tests")]
+[assembly: InternalsVisibleTo("Worker.Tests")]
 namespace Sentinela.Infrastructure.DataAccess;
 
 internal class SentinelaDbContext : DbContext
