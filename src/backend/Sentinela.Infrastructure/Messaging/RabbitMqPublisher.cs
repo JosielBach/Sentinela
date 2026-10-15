@@ -6,9 +6,6 @@ namespace Sentinela.Infrastructure.Messaging;
 
 internal sealed class RabbitMqPublisher : IQueuePublisher
 {
-    private const string EXCHANGE = "sentinela.ingestion";
-    private const string QUEUE = "sentinela.samples";
-    private const string ROUTING_KEY = "samples";
     private readonly IConnection _connection;
     public RabbitMqPublisher(IConnection connection)
     {
@@ -21,13 +18,11 @@ internal sealed class RabbitMqPublisher : IQueuePublisher
 
         await using var channel = await _connection.CreateChannelAsync(options);
 
-        await channel.ExchangeDeclareAsync(EXCHANGE, ExchangeType.Direct, durable: true);
-        await channel.QueueDeclareAsync(QUEUE, durable: true, exclusive: false, autoDelete: false);
-        await channel.QueueBindAsync(QUEUE, EXCHANGE, ROUTING_KEY);
+        await RabbitMqTopology.Declare(channel);
 
         var properties = new BasicProperties { Persistent = true, ContentType = "application/json" };
         var body = JsonSerializer.SerializeToUtf8Bytes(message);
 
-        await channel.BasicPublishAsync(EXCHANGE, ROUTING_KEY, mandatory: true, properties, body);
+        await channel.BasicPublishAsync(RabbitMqTopology.EXCHANGE, RabbitMqTopology.ROUTING_KEY, mandatory: true, properties, body);
     }
 }

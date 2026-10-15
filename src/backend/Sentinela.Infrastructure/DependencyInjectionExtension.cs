@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
+using Sentinela.Domain.Caching;
 using Sentinela.Domain.Identity;
 using Sentinela.Domain.Messaging;
 using Sentinela.Domain.Repositories;
@@ -11,6 +12,7 @@ using Sentinela.Domain.Repositories.User;
 using Sentinela.Domain.Security.ApiKeyHashing;
 using Sentinela.Domain.Security.PasswordHashing;
 using Sentinela.Domain.Security.Tokens;
+using Sentinela.Infrastructure.Caching;
 using Sentinela.Infrastructure.DataAccess;
 using Sentinela.Infrastructure.DataAccess.Repositories;
 using Sentinela.Infrastructure.Identity;
@@ -18,6 +20,7 @@ using Sentinela.Infrastructure.Messaging;
 using Sentinela.Infrastructure.Security.ApiKeyHashing;
 using Sentinela.Infrastructure.Security.PasswordHashing;
 using Sentinela.Infrastructure.Security.Tokens.Access;
+using StackExchange.Redis;
 
 namespace Sentinela.Infrastructure;
 
@@ -34,7 +37,6 @@ public static class DependencyInjectionExtension
             services.AddDbContext(configuration);
             services.AddScoped<ILoggedUser, LoggedUser>();
             services.AddScoped<IApiKeyHasher, Sha256ApiKeyHasher>();
-            
         }
 
         public void AddWorkerInfrastructure(IConfiguration configuration)
@@ -42,6 +44,7 @@ public static class DependencyInjectionExtension
             services.AddRepositories();
             services.AddDbContext(configuration);
             services.AddMessaging(configuration);
+            services.AddCaching(configuration);
         }
 
         private void AddRepositories()
@@ -93,6 +96,17 @@ public static class DependencyInjectionExtension
             });
 
             services.AddScoped<IQueuePublisher, RabbitMqPublisher>();
+        }
+        private void AddCaching(IConfiguration configuration)
+        {
+            services.AddSingleton<IConnectionMultiplexer>(_ =>
+            {
+                var connectionString = configuration.GetValue<string>("Redis:ConnectionString")!;
+
+                return ConnectionMultiplexer.Connect(connectionString);
+            });
+
+            services.AddScoped<IIdempotencyCache, RedisIdempotency>();
         }
     }
 }
