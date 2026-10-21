@@ -42,7 +42,7 @@ internal sealed class AssetRepository : IAssetReadOnlyRepository, IAssetWriteOnl
     public async Task UpdateLastSeen(Guid assetId, DateTime lastSeenAt)
     {
         var asset = await _dbContext.Assets.FirstOrDefaultAsync(asset => asset.Id == assetId);
-        if (asset != null)
+        if (asset != null && (asset.LastSeenAt is null || lastSeenAt > asset.LastSeenAt))
         {
             asset.LastSeenAt = lastSeenAt;
         }
