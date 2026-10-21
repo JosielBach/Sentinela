@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/src/" />
+  <Folder Name="/src/agent/">
+    <Project Path="src/agent/Sentinela.Agent/Sentinela.Agent.csproj" Id="4184c51d-1f3f-4f84-ad9e-8fbb196d206d" />
+  </Folder>
   <Folder Name="/src/backend/">
     <Project Path="src/backend/Sentinela.Api/Sentinela.Api.csproj" Id="6eba4052-3d0b-4216-bbd0-90770998c3a9" />
     <Project Path="src/backend/Sentinela.Application/Sentinela.Application.csproj" Id="43fb4e75-1836-47fe-b5a3-9b08cb5821e7" />

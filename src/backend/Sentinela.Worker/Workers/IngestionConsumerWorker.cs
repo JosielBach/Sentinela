@@ -54,7 +54,7 @@ public class IngestionConsumerWorker : BackgroundService
             {
                 _logger.LogError(exception, "Failed to process sample batch");
 
-                await channel.BasicNackAsync(eventArgs.DeliveryTag, multiple: false, requeue: true);
+                await channel.BasicRejectAsync(eventArgs.DeliveryTag, requeue: true);
             }
         };
 
